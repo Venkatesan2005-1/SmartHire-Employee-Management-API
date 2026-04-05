@@ -4,7 +4,7 @@ import com.venkatesan.smarthire.entity.Employee;
 import com.venkatesan.smarthire.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
+import com.venkatesan.smarthire.exception.ResourceNotFoundException;
 import java.util.List;
 
 @Service
@@ -16,7 +16,7 @@ public class EmployeeService{
     }
     public Employee getEmployeeById(Long id){
         return employeeRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Employee not found with id: "+id));
+                .orElseThrow(()-> new ResourceNotFoundException("Employee not found with id: "+id));
     }
     public Employee createEmployee(Employee employee){
         return employeeRepository.save(employee);
