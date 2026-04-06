@@ -2,6 +2,7 @@
 
 import com.venkatesan.smarthire.entity.Employee;
 import com.venkatesan.smarthire.service.EmployeeService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,14 +25,14 @@ public class EmployeeController{
     }
 
     @PostMapping
-    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee){
+    public ResponseEntity<Employee> createEmployee(@Valid @RequestBody Employee employee){
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(employeeService.createEmployee(employee));
     }
     @PutMapping("/{id}")
     public ResponseEntity<Employee> updateEmployee(
             @PathVariable Long id,
-            @RequestBody Employee employeeDetails){
+            @Valid @RequestBody Employee employeeDetails){
         return ResponseEntity.ok(employeeService.updateEmployee(id,employeeDetails));
     }
     @DeleteMapping("/{id}")
